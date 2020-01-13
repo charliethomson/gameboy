@@ -10,7 +10,10 @@ pub struct Reg16 {
 
 impl From<u16> for Reg16 {
   fn from(item: u16) -> Self {
-    Reg16 { high: (item >> 8) as u8, low: item as u8 & 0xFF }
+    Reg16 {
+        high: (item >> 8) as u8,
+        low: item as u8 & 0xFF
+    }
   }
 }
 
@@ -20,11 +23,51 @@ impl Into<u16> for Reg16 {
     }
 }
 
+impl Default for Reg16 {
+    fn default() -> Self {
+        Reg16 {
+            high: 0,
+            low: 0,
+        }
+    }
+}
+
+pub struct Flags {
+    pub Z: bool,
+    pub N: bool,
+    pub H: bool,
+    pub C: bool,
+} impl Default for Flags {
+    fn default() -> Self {
+        Flags {
+            Z: false,
+            N: false,
+            H: false,
+            C: false,
+        }
+    }
+}
+
 pub struct Registers {
-    AF: Reg16,
-    BC: Reg16,
-    DE: Reg16,
-    HL: Reg16,
+    pub A: Reg8,
+    pub BC: Reg16,
+    pub DE: Reg16,
+    pub HL: Reg16,
+    pub SP: u16,
+    pub PC: u16,
+    pub F: Flags,
+} impl Registers {
+    pub fn new() -> Self {
+        Registers {
+            A: 0,
+            BC: Reg16::default(),
+            DE: Reg16::default(),
+            HL: Reg16::default(),
+            SP: 0,
+            PC: 0,
+            F: Flags::default(),
+        }
+    }
 }
 
 

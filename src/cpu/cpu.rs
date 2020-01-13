@@ -4,6 +4,10 @@ use super::{
     registers::Registers,
 };
 
+use std::{
+    path::Path,
+};
+
 pub struct CPU {
     rom: ROM,
     memory: Vec<u8>,
